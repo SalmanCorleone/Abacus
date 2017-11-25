@@ -1,4 +1,4 @@
-package com.example.salman.calculation;
+package com.example.salman.abacus;
 
 import org.junit.Test;
 

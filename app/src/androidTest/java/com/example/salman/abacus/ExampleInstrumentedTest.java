@@ -1,4 +1,4 @@
-package com.example.salman.calculation;
+package com.example.salman.abacus;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

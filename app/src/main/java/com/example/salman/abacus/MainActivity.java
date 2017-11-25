@@ -1,11 +1,8 @@
-package com.example.salman.calculation;
+package com.example.salman.abacus;
 
 import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,8 +32,43 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setOperatorListeners()
-    {
+    /*Event Listener for Operator Buttons*/
+    private void setOperatorListeners() {
+        /*************
+         * Basic Idea:
+         * ***********
+         * The whole process works with 3 steps.
+         *
+         * First Step:
+         * Input for the first number.
+         * Any of the four operator buttons (add, sub, mult or div)
+         * will save the number, check it's validity,
+         * save the operator pressed as active operator and
+         * take the process to the the second step.
+         *
+         * Second Step:
+         * Input for the second number.
+         * The epl operator (=) will save the second number,
+         * check it's validity and proceed to step three.
+         * In the meantime, if any other operator is pressed,
+         * it will only changed the current active operator,
+         * not the number or current step.
+         *
+         * Third Step:
+         * It will calculate the result using 2 numbers given
+         * and active operator and display the result.
+         * Now, if any number is pressed,
+         * it will go back  to step 1.
+         * If another operator is pressed, it be considered active operator,
+         * the answer will be saved as first input number
+         * and it will proceed to step 2.
+         *
+         * Inputs like empty string, multiple points,
+         * several signs are also handled with if-else.
+         *
+         * *************/
+
+
         add.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -73,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 sub.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
                 mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
                 div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-
-
 
 
             }
@@ -114,8 +144,6 @@ public class MainActivity extends AppCompatActivity {
                 add.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
                 mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
                 div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-
-
 
 
             }
@@ -198,7 +226,6 @@ public class MainActivity extends AppCompatActivity {
                 add.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
 
 
-
             }
         });
 
@@ -260,10 +287,6 @@ public class MainActivity extends AppCompatActivity {
                 sub.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
                 mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
                 div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-
-
-
-
 
 
             }
@@ -344,9 +367,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    private void setNumberListerners()
-    {
+    /*Event Listener for Numbers and Point Buttons*/
+    private void setNumberListerners() {
         btn0.setOnClickListener(numclicks);
         btn1.setOnClickListener(numclicks);
         btn2.setOnClickListener(numclicks);
@@ -360,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
         btnPoint.setOnClickListener(numclicks);
     }
 
-
+    /*Mapping all Buttons and Text-fields with XML*/
     private void init() {
         btn0 = (Button) findViewById(R.id.btn0);
         btn1 = (Button) findViewById(R.id.btn1);
@@ -401,8 +423,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private View.OnClickListener numclicks = new View.OnClickListener()
-    {
+    /*One Common Listener for all the Number Buttons*/
+    private View.OnClickListener numclicks = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
