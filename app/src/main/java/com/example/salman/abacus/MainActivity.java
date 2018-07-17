@@ -1,23 +1,21 @@
 package com.example.salman.abacus;
 
 import android.annotation.TargetApi;
-import android.content.res.ColorStateList;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, add, sub, mult, div, eql, btnPoint;
-    ImageButton clr, back, root, min;
-    String str1, str2, str3, currentOp;
+    Button clr, back, min;
+    String str1, str2, str3, currentOp, pastOp;
     float num1, num2, result;
-    TextView txt1, txt2, txt3;
+    TextView txt1, txt2, txt3, signBox;
     int step;
 
 
@@ -25,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
         setNumberListerners();
         setOperatorListeners();
@@ -93,18 +90,18 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        txt1.setText(String.valueOf(num1));
+//                        txt1.setText(String.valueOf(num1));
                     }
 
                 }
                 step = 2;
                 currentOp = "add";
-                add.setBackgroundTintList(ColorStateList.valueOf(0xFF1b4a4c));
-                //add.setTextColor(Color.parseColor("#ffee3a"));
+                signBox.setText("+");
+                add.setBackground(getDrawable(R.drawable.selected));
+                sub.setBackground(getDrawable(R.drawable.numbtn));
+                mult.setBackground(getDrawable(R.drawable.numbtn));
+                div.setBackground(getDrawable(R.drawable.numbtn));
 
-                sub.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
 
 
             }
@@ -132,18 +129,19 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Syntax Error",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        txt1.setText(String.valueOf(num1));
+//                        txt1.setText(String.valueOf(num1));
                     }
 
                 }
                 step = 2;
                 currentOp = "sub";
-                sub.setBackgroundTintList(ColorStateList.valueOf(0xFF1b4a4c));
-                //sub.setTextColor(Color.parseColor("#ffee3a"));
+                signBox.setText("-");
 
-                add.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
+                add.setBackground(getDrawable(R.drawable.numbtn));
+                sub.setBackground(getDrawable(R.drawable.selected));
+                mult.setBackground(getDrawable(R.drawable.numbtn));
+                div.setBackground(getDrawable(R.drawable.numbtn));
+
 
 
             }
@@ -171,19 +169,19 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Syntax Error",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        txt1.setText(String.valueOf(num1));
+//                        txt1.setText(String.valueOf(num1));
                     }
 
                 }
                 step = 2;
                 currentOp = "mult";
+                signBox.setText("*");
 
-                mult.setBackgroundTintList(ColorStateList.valueOf(0xFF1b4a4c));
-                //mult.setTextColor(Color.parseColor("#ffee3a"));
 
-                sub.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                add.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
+                add.setBackground(getDrawable(R.drawable.numbtn));
+                sub.setBackground(getDrawable(R.drawable.numbtn));
+                mult.setBackground(getDrawable(R.drawable.selected));
+                div.setBackground(getDrawable(R.drawable.numbtn));
 
 
             }
@@ -212,18 +210,19 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Syntax Error",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        txt1.setText(String.valueOf(num1));
+//                        txt1.setText(String.valueOf(num1));
                     }
 
                 }
                 step = 2;
                 currentOp = "div";
-                div.setBackgroundTintList(ColorStateList.valueOf(0xFF1b4a4c));
-                //div.setTextColor(Color.parseColor("#ffee3a"));
+                signBox.setText("/");
 
-                sub.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                add.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
+
+                add.setBackground(getDrawable(R.drawable.numbtn));
+                sub.setBackground(getDrawable(R.drawable.numbtn));
+                mult.setBackground(getDrawable(R.drawable.numbtn));
+                div.setBackground(getDrawable(R.drawable.selected));
 
 
             }
@@ -233,6 +232,13 @@ public class MainActivity extends AppCompatActivity {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
+                if(step==3)
+                {
+                    num1 = result;
+                    txt1.setText(String.valueOf(num1));
+                    currentOp = pastOp;
+
+                }
                 step = 3;
                 if (str2 != "") {
                     try {
@@ -243,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
-                txt2.setText(String.valueOf(num2));
+//                txt2.setText(String.valueOf(num2));
 
 
                 switch (currentOp) {
@@ -282,11 +288,17 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
 
+                pastOp = currentOp;
                 currentOp = "";
-                add.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                sub.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
+
+
+
+                add.setBackground(getDrawable(R.drawable.numbtn));
+                sub.setBackground(getDrawable(R.drawable.numbtn));
+                mult.setBackground(getDrawable(R.drawable.numbtn));
+                div.setBackground(getDrawable(R.drawable.numbtn));
+
+
 
 
             }
@@ -300,16 +312,19 @@ public class MainActivity extends AppCompatActivity {
                 str1 = str2 = str3 = currentOp = "";
                 num1 = num2 = result = 0;
 
-                txt1.setText("0.0");
+                txt1.setText(str1);
                 txt2.setText(str2);
                 txt3.setText(str3);
 
                 step = 1;
                 currentOp = "";
-                add.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                sub.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                mult.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
-                div.setBackgroundTintList(ColorStateList.valueOf(0xFF00ba96));
+                signBox.setText("");
+
+
+                add.setBackground(getDrawable(R.drawable.numbtn));
+                sub.setBackground(getDrawable(R.drawable.numbtn));
+                mult.setBackground(getDrawable(R.drawable.numbtn));
+                div.setBackground(getDrawable(R.drawable.numbtn));
 
             }
         });
@@ -327,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        root.setOnClickListener(new View.OnClickListener() {
+        /*root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (step == 3) {
@@ -338,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
                     txt2.setText("");
                 }
             }
-        });
+        });*/
 
         min.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -402,19 +417,20 @@ public class MainActivity extends AppCompatActivity {
         div = (Button) findViewById(R.id.btnDivide);
 
         eql = (Button) findViewById(R.id.btnEql);
-        clr = (ImageButton) findViewById(R.id.btnClr);
-        back = (ImageButton) findViewById(R.id.btnBack);
-        root = (ImageButton) findViewById(R.id.btnSqrt);
-        min = (ImageButton) findViewById(R.id.btnMin);
+        clr = (Button) findViewById(R.id.btnClr);
+        back = (Button) findViewById(R.id.btnBack);
+//        root = (Button) findViewById(R.id.btnSqrt);
+        min = (Button) findViewById(R.id.btnMin);
 
         txt1 = (TextView) findViewById(R.id.textView2);
         txt2 = (TextView) findViewById(R.id.textView3);
         txt3 = (TextView) findViewById(R.id.textView4);
+        signBox = (TextView) findViewById(R.id.signbox);
 
         str1 = str2 = str3 = currentOp = "";
         num1 = num2 = result = 0;
 
-        txt1.setText("0.0");
+        txt1.setText(str1);
         txt2.setText(str2);
         txt3.setText(str3);
 
@@ -447,6 +463,7 @@ public class MainActivity extends AppCompatActivity {
                 txt2.setText(str2);
                 txt3.setText(str3);
                 step = 1;
+                signBox.setText("");
             }
 
 
