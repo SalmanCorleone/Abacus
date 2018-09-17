@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -58,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"
                     android:id="@+id/btnClr"
-                    android:background="@drawable/numbtn"
+                    android:background="#FF5722"
                     android:layout_weight="1"
 
 
@@ -104,6 +104,7 @@
                     android:textColor="#fff"
                     android:layout_weight="1"
                     android:background="@drawable/numbtn"
+                    android:textSize="20dp"
 
                     />
 
@@ -112,10 +113,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:id="@+id/btn8"
-
                     android:textColor="#fff"
                     android:layout_weight="1"
                     android:background="@drawable/numbtn"
+                    android:textSize="20dp"
                     />
 
                 <Button
@@ -126,6 +127,7 @@
                     android:textColor="#fff"
                     android:background="@drawable/numbtn"
                     android:layout_weight="1"
+                    android:textSize="20dp"
 
                     />
 
@@ -141,7 +143,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:id="@+id/btn4"
-
+                    android:textSize="20dp"
                     android:background="@drawable/numbtn"
                     android:textColor="#fff"
                     android:layout_weight="1"
@@ -151,7 +153,7 @@
                     android:text="5"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-
+                    android:textSize="20dp"
                     android:id="@+id/btn5"
                     android:textColor="#fff"
                     android:layout_weight="1"
@@ -162,7 +164,7 @@
                     android:text="6"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-
+                    android:textSize="20dp"
                     android:id="@+id/btn6"
                     android:textColor="#fff"
                     android:layout_weight="1"
@@ -185,7 +187,7 @@
                     android:text="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-
+                    android:textSize="20dp"
                     android:id="@+id/btn1"
                     android:textColor="#fff"
                     android:layout_weight="1"
@@ -196,7 +198,7 @@
                     android:text="2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-
+                    android:textSize="20dp"
                     android:id="@+id/btn2"
                     android:textColor="#fff"
                     android:layout_weight="1"
@@ -206,7 +208,7 @@
                     android:text="3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-
+                    android:textSize="20dp"
                     android:id="@+id/btn3"
                     android:textColor="#fff"
                     android:layout_weight="1"
@@ -234,6 +236,7 @@
                     android:textColor="#fff"
                     android:background="@drawable/numbtn"
                     android:layout_weight="2"
+                    android:textSize="20dp"
 
                     />
 
@@ -245,6 +248,7 @@
                     android:textColor="#fff"
                     android:background="@drawable/numbtn"
                     android:layout_weight="1"
+                    android:textSize="20dp"
                     />
 
 
@@ -270,17 +274,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="65dp">
+
                 <Button
-                    android:text="+"
+                    android:text="/"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/btnPlus"
+                    android:id="@+id/btnDivide"
                     android:background="@drawable/numbtn"
-                    android:textColor="@android:color/white"
                     android:textSize="20sp"
-                     />
+                    android:textColor="@android:color/white"
+
+                    />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+
+                <Button
+                    android:text="*"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnMult"
+                    android:background="@drawable/numbtn"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+
+
+                    />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -301,33 +325,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="65dp">
-
                 <Button
-                    android:text="*"
+                    android:text="+"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/btnMult"
+                    android:id="@+id/btnPlus"
                     android:background="@drawable/numbtn"
-                    android:textSize="20sp"
                     android:textColor="@android:color/white"
-
-                     />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp">
-
-                <Button
-                    android:text="/"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/btnDivide"
-                    android:background="@drawable/numbtn"
                     android:textSize="20sp"
-                    android:textColor="@android:color/white"
-
                     />
 
             </LinearLayout>
@@ -368,6 +373,9 @@
 
 
 
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="240dp"
@@ -381,24 +389,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-        <!--<TextView-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Enter Values"-->
-            <!--android:textColor="@color/colorPrimaryDark"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_gravity="end"-->
-            <!--android:textAlignment="textEnd"-->
-            <!--/>-->
+
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView"
             android:layout_marginTop="20dp"
             android:id="@+id/textView2"
             android:textAlignment="textEnd"
@@ -429,14 +424,13 @@
             android:textAlignment="textEnd"
             android:layout_gravity="end"
             android:paddingTop="20dp"
-            android:textSize="50dp"
+            android:textSize="40dp"
             android:textColor="@color/colorPrimaryDark"
             />
 
 
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="100dp"

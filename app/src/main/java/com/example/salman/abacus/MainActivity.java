@@ -9,15 +9,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, add, sub, mult, div, eql, btnPoint;
     Button clr, back, min;
     String str1, str2, str3, currentOp, pastOp;
-    float num1, num2, result;
+    double num1, num2, result;
     TextView txt1, txt2, txt3, signBox;
+    DecimalFormat df;
     int step;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,42 +33,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*Event Listener for Operator Buttons*/
+
+    /*************
+     * Basic Idea:
+     * ***********
+     * The whole process works with 3 steps.
+     * <p>
+     * First Step:
+     * Input for the first number.
+     * Any of the four operator buttons (add, sub, mult or div)
+     * will save the number, check it's validity,
+     * save the operator pressed as active operator and
+     * take the process to the the second step.
+     * <p>
+     * Second Step:
+     * Input for the second number.
+     * The epl operator (=) will save the second number,
+     * check it's validity and proceed to step three.
+     * In the meantime, if any other operator is pressed,
+     * it will only changed the current active operator,
+     * not the number or current step.
+     * <p>
+     * Third Step:
+     * It will calculate the result using 2 numbers given
+     * and active operator and display the result.
+     * Now, if any number is pressed,
+     * it will go back  to step 1.
+     * If another operator is pressed, it be considered active operator,
+     * the answer will be saved as first input number
+     * and it will proceed to step 2.
+     * <p>
+     * Inputs like empty string, multiple points,
+     * several signs are also handled with if-else.
+     *************/
     private void setOperatorListeners() {
-        /*************
-         * Basic Idea:
-         * ***********
-         * The whole process works with 3 steps.
-         *
-         * First Step:
-         * Input for the first number.
-         * Any of the four operator buttons (add, sub, mult or div)
-         * will save the number, check it's validity,
-         * save the operator pressed as active operator and
-         * take the process to the the second step.
-         *
-         * Second Step:
-         * Input for the second number.
-         * The epl operator (=) will save the second number,
-         * check it's validity and proceed to step three.
-         * In the meantime, if any other operator is pressed,
-         * it will only changed the current active operator,
-         * not the number or current step.
-         *
-         * Third Step:
-         * It will calculate the result using 2 numbers given
-         * and active operator and display the result.
-         * Now, if any number is pressed,
-         * it will go back  to step 1.
-         * If another operator is pressed, it be considered active operator,
-         * the answer will be saved as first input number
-         * and it will proceed to step 2.
-         *
-         * Inputs like empty string, multiple points,
-         * several signs are also handled with if-else.
-         *
-         * *************/
-
-
         add.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -75,32 +76,27 @@ public class MainActivity extends AppCompatActivity {
                     result = 0;
                     num2 = 0;
                     str2 = "";
-                    txt1.setText(String.valueOf(num1));
+                    txt1.setText(String.valueOf(df.format(num1)));
                     txt2.setText("");
                     txt3.setText("");
 
+                } else if (step == 2) {
+                    eql.performClick();
+                    add.performClick();
                 } else if (step == 1) {
 
                     if (str1 != "") {
                         try {
-                            num1 = Float.parseFloat(str1);
-
+                            num1 = Double.parseDouble(str1);
                         } catch (NumberFormatException nfe) {
                             Toast.makeText(getApplicationContext(), "Syntax Error",
                                     Toast.LENGTH_SHORT).show();
                         }
-
-//                        txt1.setText(String.valueOf(num1));
                     }
-
                 }
                 step = 2;
                 currentOp = "add";
                 signBox.setText("+");
-                add.setBackground(getDrawable(R.drawable.selected));
-                sub.setBackground(getDrawable(R.drawable.numbtn));
-                mult.setBackground(getDrawable(R.drawable.numbtn));
-                div.setBackground(getDrawable(R.drawable.numbtn));
 
 
 
@@ -116,31 +112,28 @@ public class MainActivity extends AppCompatActivity {
                     result = 0;
                     num2 = 0;
                     str2 = "";
-                    txt1.setText(String.valueOf(num1));
+                    txt1.setText(String.valueOf(df.format(num1)));
                     txt2.setText("");
                     txt3.setText("");
 
+                } else if (step == 2) {
+                    eql.performClick();
+                    sub.performClick();
                 } else if (step == 1) {
                     if (str1 != "") {
                         try {
-                            num1 = Float.parseFloat(str1);
+                            num1 = Double.parseDouble(str1);
 
                         } catch (NumberFormatException nfe) {
                             Toast.makeText(getApplicationContext(), "Syntax Error",
                                     Toast.LENGTH_SHORT).show();
                         }
-//                        txt1.setText(String.valueOf(num1));
                     }
 
                 }
                 step = 2;
                 currentOp = "sub";
                 signBox.setText("-");
-
-                add.setBackground(getDrawable(R.drawable.numbtn));
-                sub.setBackground(getDrawable(R.drawable.selected));
-                mult.setBackground(getDrawable(R.drawable.numbtn));
-                div.setBackground(getDrawable(R.drawable.numbtn));
 
 
 
@@ -155,21 +148,24 @@ public class MainActivity extends AppCompatActivity {
                     result = 0;
                     num2 = 0;
                     str2 = "";
-                    txt1.setText(String.valueOf(num1));
+                    txt1.setText(String.valueOf(df.format(num1)));
                     txt2.setText("");
                     txt3.setText("");
 
 
+                } else if (step == 2) {
+                    eql.performClick();
+                    mult.performClick();
                 } else if (step == 1) {
                     if (str1 != "") {
                         try {
-                            num1 = Float.parseFloat(str1);
+                            num1 = Double.parseDouble(str1);
 
                         } catch (NumberFormatException nfe) {
                             Toast.makeText(getApplicationContext(), "Syntax Error",
                                     Toast.LENGTH_SHORT).show();
                         }
-//                        txt1.setText(String.valueOf(num1));
+
                     }
 
                 }
@@ -178,10 +174,6 @@ public class MainActivity extends AppCompatActivity {
                 signBox.setText("*");
 
 
-                add.setBackground(getDrawable(R.drawable.numbtn));
-                sub.setBackground(getDrawable(R.drawable.numbtn));
-                mult.setBackground(getDrawable(R.drawable.selected));
-                div.setBackground(getDrawable(R.drawable.numbtn));
 
 
             }
@@ -195,22 +187,25 @@ public class MainActivity extends AppCompatActivity {
                     result = 0;
                     num2 = 0;
                     str2 = "";
-                    txt1.setText(String.valueOf(num1));
+                    txt1.setText(String.valueOf(df.format(num1)));
                     txt2.setText("");
                     txt3.setText("");
 
+                } else if (step == 2) {
+                    eql.performClick();
+                    div.performClick();
                 } else if (step == 1) {
 
                     if (str1 != "") {
 
                         try {
-                            num1 = Float.parseFloat(str1);
+                            num1 = Double.parseDouble(str1);
 
                         } catch (NumberFormatException nfe) {
                             Toast.makeText(getApplicationContext(), "Syntax Error",
                                     Toast.LENGTH_SHORT).show();
                         }
-//                        txt1.setText(String.valueOf(num1));
+
                     }
 
                 }
@@ -219,10 +214,6 @@ public class MainActivity extends AppCompatActivity {
                 signBox.setText("/");
 
 
-                add.setBackground(getDrawable(R.drawable.numbtn));
-                sub.setBackground(getDrawable(R.drawable.numbtn));
-                mult.setBackground(getDrawable(R.drawable.numbtn));
-                div.setBackground(getDrawable(R.drawable.selected));
 
 
             }
@@ -232,48 +223,44 @@ public class MainActivity extends AppCompatActivity {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                if(step==3)
-                {
+                if (step == 3) {
                     num1 = result;
-                    txt1.setText(String.valueOf(num1));
+                    txt1.setText(String.valueOf(df.format(num1)));
                     currentOp = pastOp;
 
                 }
                 step = 3;
                 if (str2 != "") {
                     try {
-                        num2 = Float.parseFloat(str2);
+                        num2 = Double.parseDouble(str2);
 
                     } catch (NumberFormatException nfe) {
                         Toast.makeText(getApplicationContext(), "Syntax Error on Second Number",
                                 Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    if (currentOp == "mult" || currentOp == "div") num2 = 1;
+                    txt2.setText(String.valueOf(df.format(num2)));
                 }
-//                txt2.setText(String.valueOf(num2));
 
 
                 switch (currentOp) {
                     case "add":
                         result = num1 + num2;
-                        txt3.setText(String.valueOf(result));
                         break;
                     case "sub":
                         result = num1 - num2;
-                        txt3.setText(String.valueOf(result));
                         break;
                     case "mult":
                         result = num1 * num2;
-                        txt3.setText(String.valueOf(result));
                         break;
                     case "div":
                         result = num1 / num2;
-                        txt3.setText(String.valueOf(result));
                         break;
-
                     case "":
                         if (str1 != "") {
                             try {
-                                num1 = Float.parseFloat(str1);
+                                num1 = Double.parseDouble(str1);
 
                             } catch (NumberFormatException nfe) {
                                 Toast.makeText(getApplicationContext(), "Syntax Error",
@@ -282,22 +269,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                         result = num1;
                         txt2.setText("0");
-                        txt3.setText(String.valueOf(num1));
+
                         break;
                     default:
                         break;
                 }
-
+                txt3.setText(String.valueOf(df.format(result)));
                 pastOp = currentOp;
                 currentOp = "";
-
-
-
-                add.setBackground(getDrawable(R.drawable.numbtn));
-                sub.setBackground(getDrawable(R.drawable.numbtn));
-                mult.setBackground(getDrawable(R.drawable.numbtn));
-                div.setBackground(getDrawable(R.drawable.numbtn));
-
 
 
 
@@ -320,12 +299,6 @@ public class MainActivity extends AppCompatActivity {
                 currentOp = "";
                 signBox.setText("");
 
-
-                add.setBackground(getDrawable(R.drawable.numbtn));
-                sub.setBackground(getDrawable(R.drawable.numbtn));
-                mult.setBackground(getDrawable(R.drawable.numbtn));
-                div.setBackground(getDrawable(R.drawable.numbtn));
-
             }
         });
 
@@ -342,18 +315,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*root.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (step == 3) {
-                    result = (float) Math.sqrt(result);
-                    txt3.setText(String.valueOf(result));
-                    num1 = num2 = 0;
-                    txt1.setText("0.0");
-                    txt2.setText("");
-                }
-            }
-        });*/
 
         min.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -419,7 +380,6 @@ public class MainActivity extends AppCompatActivity {
         eql = (Button) findViewById(R.id.btnEql);
         clr = (Button) findViewById(R.id.btnClr);
         back = (Button) findViewById(R.id.btnBack);
-//        root = (Button) findViewById(R.id.btnSqrt);
         min = (Button) findViewById(R.id.btnMin);
 
         txt1 = (TextView) findViewById(R.id.textView2);
@@ -433,6 +393,10 @@ public class MainActivity extends AppCompatActivity {
         txt1.setText(str1);
         txt2.setText(str2);
         txt3.setText(str3);
+
+        df = new DecimalFormat("#.######");
+        df.setRoundingMode(RoundingMode.CEILING);
+        df.setMaximumIntegerDigits(10);
 
         step = 1;
 

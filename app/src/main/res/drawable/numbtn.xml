@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/selected" android:state_pressed="true"/>
+    <item android:drawable="@drawable/numdefault"></item>
 
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-
-    <gradient
-        android:startColor="#0Affffff"
-        android:angle="180"
-        android:endColor="#00ffffff"
-        android:type="linear"
-
-        />
-
-
-
-
-
-
-
-    <padding
-        android:bottom="7dp"
-        android:left="7dp"
-        android:right="7dp"
-        android:top="7dp" />
-
-
-
-
-</shape>
+</selector>
