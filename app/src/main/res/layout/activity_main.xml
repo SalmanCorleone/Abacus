@@ -349,8 +349,6 @@
                     android:id="@+id/btnEql"
                     android:textSize="20sp"
                     android:background="@drawable/numbtn"
-
-
                     />
 
             </LinearLayout>
