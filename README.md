@@ -2,7 +2,7 @@
 <h2>Abacus</h2>
 <strong>A State Based Simple Arithmatic Calculator with Android Studio</strong>
 <br/><br/><br/>
-<img src="./res/Banner.jpg">
+<!-- <img src="./res/Banner.jpg"> -->
 <h3>Description</h3>
 
 <p><b>Abacus</b> is a general purpose <b>Android Calculator App</b> that works on single step, algebraic entry system mode.
