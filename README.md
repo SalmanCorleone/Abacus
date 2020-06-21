@@ -2,6 +2,7 @@
 <h2>Abacus</h2>
 <strong>A State Based Simple Arithmatic Calculator with Android Studio</strong>
 <br/><br/><br/>
+<img src="https://preview.ibb.co/mF3r2K/Scrn100.jpg" alt="Scrn100" border="0">
 <!-- <img src="./res/Banner.jpg"> -->
 <h3>Description</h3>
 
@@ -14,7 +15,6 @@ Optimized to perform arithmetic calculations without causing floating point or u
 <li><b>Chain Operations</b> implemented</li>
 <li>Clean and Explained Code Structure</li>
 </ul>
-<img src="https://preview.ibb.co/mF3r2K/Scrn100.jpg" alt="Scrn100" border="0">
 <br>
 <br><br>
 <p>
